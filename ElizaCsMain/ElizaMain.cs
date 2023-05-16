@@ -27,7 +27,7 @@
         {
             get
             {
-                return CurrentOutput;
+                return _CurrentOutput;
             }
         }
 
@@ -36,10 +36,28 @@
             get { return _LatestInput; }
         }
 
+        public bool UserSaidToEnd
+        {
+            get
+            {
+                return _LatestInput.Contains("SHUT");
+            }
+        }
+
         public void UseInput(string UserInputIn)
         {
             _LatestInput = UserInputIn;
+            if (UserSaidToEnd)
+            {
+                ShutUp();
+                return;
+            }
             _CurrentOutput = "WE WERE DISCUSSING YOU-- NOT ME.";
+        }
+
+        private void ShutUp()
+        {
+            _CurrentOutput = "SHUT UP...";
         }
     }
 }

@@ -1,7 +1,6 @@
 //See Eliza in David Ahl's _More_Basic_Computer_Games_
 //E.g.: https://www.atariarchives.org/morebasicgames/showpage.php?page=56
 using ElizaCsMain;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Test_ElizaCsMain
 {
@@ -43,7 +42,7 @@ namespace Test_ElizaCsMain
 
 
     [TestClass]
-    public class Test_ElizaMain_InitialInput
+    public class Test_ElizaMain_InitialInput_You
     {
         private ElizaMain _Main;
         private string _UserInput = "YOU";
@@ -67,6 +66,38 @@ namespace Test_ElizaCsMain
         {
             Assert.AreEqual(_UserInput, _Main.LatestInput);
         }
+    }
 
+    [TestClass]
+    public class Test_ElizaMain_Shut
+    {
+        private ElizaMain _Main;
+        private string _UserInput = "WILL YOU SHUT UP";
+        private string _ExpectedOutput = "SHUT UP...";
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _Main = new ElizaMain();
+            _Main.UseInput(_UserInput);
+        }
+
+        [TestMethod]
+        public void Test_CurrentOutput()
+        {
+            Assert.AreEqual(_ExpectedOutput, _Main.CurrentOutput);
+        }
+
+        [TestMethod]
+        public void Test_LatestInput()
+        {
+            Assert.AreEqual(_UserInput, _Main.LatestInput);
+        }
+
+        [TestMethod]
+        public void Test_UserSaidToEnd()
+        {
+            Assert.IsTrue(_Main.UserSaidToEnd);
+        }
     }
 }
