@@ -40,4 +40,33 @@ namespace Test_ElizaCsMain
             Assert.IsNull(_Main.LatestInput);
         }
     }
+
+
+    [TestClass]
+    public class Test_ElizaMain_InitialInput
+    {
+        private ElizaMain _Main;
+        private string _UserInput = "YOU";
+        private string _ExpectedOutput = "WE WERE DISCUSSING YOU-- NOT ME.";
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _Main = new ElizaMain();
+            _Main.UseInput(_UserInput);
+        }
+
+        [TestMethod]
+        public void Test_CurrentOutput()
+        {
+            Assert.AreEqual(_ExpectedOutput, _Main.CurrentOutput);
+        }
+
+        [TestMethod]
+        public void Test_LatestInput()
+        {
+            Assert.AreEqual(_UserInput, _Main.LatestInput);
+        }
+
+    }
 }

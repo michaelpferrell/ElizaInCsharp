@@ -3,8 +3,15 @@
     public class ElizaMain
     {
         private const string _Eol = "\n";
+        private string _CurrentOutput;
+        private string _LatestInput = null;
 
-        public string CurrentOutput
+        public ElizaMain()
+        {
+            _CurrentOutput = InitialOutput;
+        }
+
+        private string InitialOutput
         {
             get
             {
@@ -16,9 +23,23 @@
             }
         }
 
+        public string CurrentOutput
+        {
+            get
+            {
+                return CurrentOutput;
+            }
+        }
+
         public string LatestInput
         {
-            get { return null; }
+            get { return _LatestInput; }
+        }
+
+        public void UseInput(string UserInputIn)
+        {
+            _LatestInput = UserInputIn;
+            _CurrentOutput = "WE WERE DISCUSSING YOU-- NOT ME.";
         }
     }
 }
