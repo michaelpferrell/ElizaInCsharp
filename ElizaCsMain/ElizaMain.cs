@@ -5,6 +5,7 @@
         private const string _Eol = "\n";
         private string _CurrentOutput;
         private string _LatestInput = null;
+        private string _PreviousInput = null;
 
         public ElizaMain()
         {
@@ -40,16 +41,22 @@
         {
             get
             {
-                return _LatestInput.Contains("SHUT");
+                return (_LatestInput != null) && (_LatestInput.Contains("SHUT"));
             }
         }
 
         public void UseInput(string UserInputIn)
         {
+            _PreviousInput = _LatestInput;
             _LatestInput = UserInputIn;
             if (UserSaidToEnd)
             {
                 ShutUp();
+                return;
+            }
+            if ((_LatestInput != null) && (_LatestInput == _PreviousInput))
+            {
+                _CurrentOutput = "PLEASE DON'T REPEAT YOURSELF!";
                 return;
             }
             _CurrentOutput = "WE WERE DISCUSSING YOU-- NOT ME.";

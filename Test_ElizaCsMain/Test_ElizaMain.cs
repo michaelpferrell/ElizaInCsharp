@@ -38,6 +38,12 @@ namespace Test_ElizaCsMain
         {
             Assert.IsNull(_Main.LatestInput);
         }
+
+        [TestMethod]
+        public void Test_UserSaidToEnd()
+        {
+            Assert.IsFalse(_Main.UserSaidToEnd);
+        }
     }
 
 
@@ -66,7 +72,14 @@ namespace Test_ElizaCsMain
         {
             Assert.AreEqual(_UserInput, _Main.LatestInput);
         }
+
+        [TestMethod]
+        public void Test_UserSaidToEnd()
+        {
+            Assert.IsFalse(_Main.UserSaidToEnd);
+        }
     }
+
 
     [TestClass]
     public class Test_ElizaMain_Shut
@@ -98,6 +111,41 @@ namespace Test_ElizaCsMain
         public void Test_UserSaidToEnd()
         {
             Assert.IsTrue(_Main.UserSaidToEnd);
+        }
+    }
+
+
+    [TestClass]
+    public class Test_ElizaMain_Repeat
+    {
+        private ElizaMain _Main;
+        private string _UserInput = "THIS IS SOME INPUT";
+        private string _ExpectedOutput = "PLEASE DON'T REPEAT YOURSELF!";
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _Main = new ElizaMain();
+            _Main.UseInput(_UserInput);
+            _Main.UseInput(_UserInput);
+        }
+
+        [TestMethod]
+        public void Test_CurrentOutput()
+        {
+            Assert.AreEqual(_ExpectedOutput, _Main.CurrentOutput);
+        }
+
+        [TestMethod]
+        public void Test_LatestInput()
+        {
+            Assert.AreEqual(_UserInput, _Main.LatestInput);
+        }
+
+        [TestMethod]
+        public void Test_UserSaidToEnd()
+        {
+            Assert.IsFalse(_Main.UserSaidToEnd);
         }
     }
 }
