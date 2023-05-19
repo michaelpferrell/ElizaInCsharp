@@ -59,6 +59,12 @@
                 _CurrentOutput = "PLEASE DON'T REPEAT YOURSELF!";
                 return;
             }
+            if ((_LatestInput != null) && (_LatestInput.StartsWith("CAN YOU ")))
+            {
+                string RestOfInput = _LatestInput.Substring("CAN YOU ".Length);
+                _CurrentOutput = string.Format("DON'T YOU BELIEVE I CAN {0}", RestOfInput);
+                return;
+            }
             _CurrentOutput = "WE WERE DISCUSSING YOU-- NOT ME.";
         }
 

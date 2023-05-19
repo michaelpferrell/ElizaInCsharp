@@ -148,4 +148,38 @@ namespace Test_ElizaCsMain
             Assert.IsFalse(_Main.UserSaidToEnd);
         }
     }
+
+    [TestClass]
+    public class Test_ElizaMain_CanYou
+    {
+        private ElizaMain _Main;
+        private string[] _UserInput = new string[] { "CAN YOU FLY", "CAN YOU UNDERSTAND", "CAN YOU READ", "CAN YOU THINK" };
+        private string[] _ExpectedOutput = new string[] {
+                "DON'T YOU BELIEVE I CAN FLY",
+                "PERHAPS YOU WOULD LIKE TO BE ABLE TO UNDERSTAND",
+                "YOU WANT ME TO BE ABLE TO READ",
+                "DON'T YOU BELIEVE I CAN THINK" };
+        private string[] _ActualLatestInput = new string[4];
+        private string[] _ActualOutput = new string[4];
+
+        [TestInitialize]
+        public void SetUp()
+        {
+            _Main = new ElizaMain();
+            for (int i = 0; i < 4; i++)
+            { _Main.UseInput(_UserInput[i]);
+                _ActualLatestInput[i] = _Main.LatestInput;
+                _ActualOutput[i] = _Main.CurrentOutput;
+            }
+        }
+
+        [TestMethod]
+        public void Test_0()
+        {
+            Assert.AreEqual(_UserInput[0], _ActualLatestInput[0]);
+            Assert.AreEqual(_ExpectedOutput[0], _ActualOutput[0]);
+        }
+
+        //Need tests for other responses...
+    }
 }
