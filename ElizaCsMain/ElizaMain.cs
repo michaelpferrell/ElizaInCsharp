@@ -51,26 +51,38 @@
             _LatestInput = UserInputIn;
             if (UserSaidToEnd)
             {
-                ShutUp();
+                _CurrentOutput = OutputForShut();
                 return;
             }
             if ((_LatestInput != null) && (_LatestInput == _PreviousInput))
             {
-                _CurrentOutput = "PLEASE DON'T REPEAT YOURSELF!";
+                _CurrentOutput = OutputForRepeat();
                 return;
             }
             if ((_LatestInput != null) && (_LatestInput.StartsWith("CAN YOU ")))
             {
-                string RestOfInput = _LatestInput.Substring("CAN YOU ".Length);
-                _CurrentOutput = string.Format("DON'T YOU BELIEVE I CAN {0}", RestOfInput);
+                _CurrentOutput = OutputForCanYou();
                 return;
             }
             _CurrentOutput = "WE WERE DISCUSSING YOU-- NOT ME.";
         }
 
-        private void ShutUp()
+        private string OutputForShut()
         {
-            _CurrentOutput = "SHUT UP...";
+            return "SHUT UP...";
         }
+
+        private static string OutputForRepeat()
+        {
+            return "PLEASE DON'T REPEAT YOURSELF!";
+        }
+
+        private string OutputForCanYou()
+        {
+            string RestOfInput = _LatestInput.Substring("CAN YOU ".Length);
+            string MyOutput = string.Format("DON'T YOU BELIEVE I CAN {0}", RestOfInput);
+            return MyOutput;
+        }
+
     }
 }
